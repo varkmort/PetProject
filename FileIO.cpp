@@ -5,9 +5,8 @@
 #include <string>
 #include <ctime>
 #include <cstdlib>
-#include <math.>
-//#include <iomanip>
-#define mark3
+#define task2
+
 
 int main(){
     setlocale(LC_ALL, "RUS");
@@ -42,30 +41,25 @@ int main(){
 	*/
 #ifdef mark2
 	std::ofstream outf;
-	outf.open(("SomeText.dat"), std::ostream::binary | std::ios::ate);
+	outf.open((".\\res\\SomeText.dat"), std::ostream::binary);
 	if (!outf.is_open()) {
 		std::cerr << "Файл, SomeText.dat Не открылся для записи!" << std::endl;
 		exit(1);
 	}
 	else {
-		int num(2147483000);
-		&num;
-
+		int num(2147483000); &num;
 		outf << "Пишем число #";
 		outf.write((char*)&num, sizeof(int));
 		outf << std::endl;
 		num++;
-
 		outf << "Пишем число #";
 		outf.write((char*)&num, sizeof(int));
 		outf << std::endl;
 		num++;
-
 		outf << "Пишем число #";
 		outf.write((char*)&num, sizeof(int));
 		outf << "\n";
 		num++;
-
 		outf << "Пишем число #";
 		outf.write((char*)&num, sizeof(int));
 		outf << "\n";
@@ -94,7 +88,7 @@ int main(){
 #endif
 #ifdef mark4 //неокончен будет работать странно)
 	std::ifstream inf;
-	inf.open(("SomeText.dat"), std::ifstream::binary);
+	inf.open((".\\res\\SomeText.dat"), std::ifstream::binary);
 	if (!inf.is_open()) {
 		std::cerr << "Файл, SomeText.dat Не открылся для чтения!" << std::endl;
 		exit(1);
@@ -102,7 +96,7 @@ int main(){
 	else {
 		while (!inf.eof()) {
 			char inputLine[15]{};
-			int value(0);
+			int value(-1);
 			inf.getline(inputLine,14);
 			//inf.seekg(14 * sizeof(char),std::ios::beg);
 			//auto deb = inf.tellg();
@@ -133,6 +127,35 @@ int main(){
 			outf << 3 + rand() % 7 << std::endl;
 		}
 
+	}
+	outf.close();
+#endif // 
+#ifdef task2
+	
+	std::string fileName{ "Task2.dat" };
+	std::fstream outf(fileName, std::ios::binary | std::ios::in | std::ios::out | std::ios::trunc);
+	if (!outf.is_open()) {
+		std::cerr << "Файл, " << fileName << " Не открылся для записи!" << std::endl;
+		exit(1);
+	}
+	else {
+		int n{0};
+		while (true) {
+			outf.write((char*)&n, sizeof(int));
+			outf << std::endl;
+			n++;
+			if (n == 10)break;
+		}
+		outf.seekg(0);
+		while (!outf.eof()) {
+			int value{ 0 };
+			outf.read((char*)&value, sizeof(int));
+			outf.seekg(1, std::ios::cur);
+			if (!outf) break;
+			std::cout << value << std::endl;
+			
+			//std::cout << outf.tellg();
+		}
 	}
 	outf.close();
 #endif // mark1

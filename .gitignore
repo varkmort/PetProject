@@ -1,3 +1,4 @@
 debug/
-.dat
-.txt
+*.dat
+*.txt
+res/

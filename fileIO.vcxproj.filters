@@ -24,4 +24,9 @@
       <Filter>Файлы ресурсов</Filter>
     </Text>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="SomeText.dat">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+  </ItemGroup>
 </Project>
